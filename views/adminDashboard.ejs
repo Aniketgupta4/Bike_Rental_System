@@ -66,10 +66,12 @@
       }
       table td:nth-of-type(1)::before { content:"User/Bike"; }
       table td:nth-of-type(2)::before { content:"Bike/Price"; }
-      table td:nth-of-type(3)::before { content:"Days/Available"; }
-      table td:nth-of-type(4)::before { content:"Total/Actions"; }
-      table td:nth-of-type(5)::before { content:"Status"; }
-      table td:nth-of-type(6)::before { content:"Action"; }
+      table td:nth-of-type(3)::before { content:"Days"; }
+      table td:nth-of-type(4)::before { content:"Pickup Date & Time"; }
+      table td:nth-of-type(5)::before { content:"Return Date"; }
+      table td:nth-of-type(6)::before { content:"Total"; }
+      table td:nth-of-type(7)::before { content:"Status"; }
+      table td:nth-of-type(8)::before { content:"Action"; }
     }
   </style>
 </head>
@@ -116,12 +118,34 @@
       <div class="card">No booking requests.</div>
     <% } else { %>
       <table>
-        <tr><th>User</th><th>Bike</th><th>Days</th><th>Total</th><th>Status</th><th>Action</th></tr>
+        <tr>
+          <th>User</th>
+          <th>Bike</th>
+          <th>Days</th>
+          <th>Request-Date-Time</th>
+          <th>Return Date</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
         <% bookings.forEach(bk => { %>
           <tr>
             <td><%= bk.user ? bk.user.name : "Deleted user" %></td>
             <td><%= bk.bike ? bk.bike.name : "Deleted bike" %></td>
             <td><%= bk.days %></td>
+            <!-- Pickup Date & Time -->
+            <td><%= bk.createdAt ? new Date(bk.createdAt).toLocaleString() : "N/A" %></td>
+            <!-- Return Date -->
+            <td>
+              <% if (bk.createdAt && bk.days) { 
+                   let returnDate = new Date(bk.createdAt);
+                   returnDate.setDate(returnDate.getDate() + bk.days);
+              %>
+                <%= returnDate.toLocaleDateString() %>
+              <% } else { %>
+                N/A
+              <% } %>
+            </td>
             <td>₹ <%= bk.totalPrice %></td>
             <td><%= bk.status %></td>
             <td>
@@ -138,7 +162,7 @@
     <% } %>
   </main>
 
-  <!-- FOOTER (same as home) -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-section">
       <h3>BikeRental</h3>
