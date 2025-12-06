@@ -20,40 +20,72 @@
     }
     header nav a:hover { background:#ff6b6b; }
 
-    /* MAIN CONTAINER */
-    main.container { width:90%; max-width:1200px; margin:20px auto 40px auto; flex:1; }
+    /* MAIN */
+    main.container { 
+      width:90%; 
+      max-width:1200px; 
+      margin:auto; 
+      padding:40px 0; 
+      flex:1; 
+      display:flex; 
+      flex-direction:column; 
+      justify-content:center; 
+      align-items:center;
+    }
 
     h2 { margin:20px 0; color:#1e1e2f; text-align:center; }
 
-    /* Requests Table */
-    .table-wrapper { overflow-x:auto; margin-top:20px; }
-    table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1); min-width:600px; }
+    /* Card when no requests */
+    .card { 
+      background:#fff; 
+      border-radius:10px; 
+      padding:25px 30px; 
+      text-align:center; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.1); 
+      font-size:1.1rem;
+    }
+
+    /* TABLE */
+    .table-wrapper { overflow-x:auto; width:100%; margin-top:20px; display:flex; justify-content:center; }
+    table { 
+      width:100%; 
+      border-collapse:collapse; 
+      background:#fff; 
+      border-radius:10px; 
+      overflow:hidden; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.1); 
+      min-width:600px; 
+    }
     th, td { padding:12px 15px; text-align:center; border-bottom:1px solid #ddd; }
     th { background:#ff6b6b; color:#fff; }
     tr:hover { background:#f9f9f9; }
-    .card { background:#fff; border-radius:10px; padding:20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin-top:20px; }
 
     /* FOOTER */
     footer {
-      background:#1e1e2f; color:#fff; padding:30px 5%; display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
+      background:#1e1e2f; 
+      color:#fff; 
+      padding:35px 5%; 
+      display:flex; 
+      flex-wrap:wrap; 
+      justify-content:space-between; 
+      gap:20px;
     }
     footer .footer-section { flex:1; min-width:200px; }
     footer h3 { color:#ff6b6b; margin-bottom:10px; }
     footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; }
     footer a:hover { text-decoration:underline; }
-    footer form input, footer form textarea { width:100%; padding:5px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc; }
+    footer form input, footer form textarea { width:100%; padding:6px; margin-bottom:6px; border-radius:5px; border:1px solid #ccc; }
     footer button { background:#ff6b6b; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
     footer button:hover { background:#ff4b4b; }
 
-    /* Responsive */
+    /* RESPONSIVE */
     @media(max-width:1024px){
       header h1 { font-size:1.8rem; }
       header nav a { padding:6px 12px; font-size:0.95rem; }
-      main.container { margin:20px 2%; }
+      main.container { margin-top:30px; }
     }
     @media(max-width:768px){
       header { flex-direction:column; align-items:flex-start; }
-      .table-wrapper { overflow-x:auto; }
       table, th, td { font-size:0.85rem; }
       footer { flex-direction:column; align-items:flex-start; }
     }
@@ -70,9 +102,7 @@
     <h1>BikeRental</h1>
     <nav>
       <a href="/">Home</a>
-      <!-- Navbar ya Dashboard me -->
       <a href="/user/profile" class="btn">Profile</a>
-
       <a href="/logout">Logout</a>
     </nav>
   </header>
