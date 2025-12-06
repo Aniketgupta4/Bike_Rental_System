@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard - BikeRental</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background:#f4f4f9; color:#333; line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+
+    /* HEADER */
+    header {
+      background:#1e1e2f; color:#fff; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    }
+    header h1 { color:#ff6b6b; font-size:2rem; }
+    header nav { display:flex; gap:15px; flex-wrap:wrap; }
+    header nav a {
+      color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; transition:0.3s; font-weight:500;
+    }
+    header nav a:hover { background:#ff6b6b; }
+
+    /* MAIN CONTAINER */
+    main.container { width:90%; max-width:1200px; margin:20px auto 40px auto; flex:1; }
+
+    h2 { margin:20px 0; color:#1e1e2f; text-align:center; }
+
+    /* Requests Table */
+    .table-wrapper { overflow-x:auto; margin-top:20px; }
+    table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1); min-width:600px; }
+    th, td { padding:12px 15px; text-align:center; border-bottom:1px solid #ddd; }
+    th { background:#ff6b6b; color:#fff; }
+    tr:hover { background:#f9f9f9; }
+    .card { background:#fff; border-radius:10px; padding:20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin-top:20px; }
+
+    /* FOOTER */
+    footer {
+      background:#1e1e2f; color:#fff; padding:30px 5%; display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
+    }
+    footer .footer-section { flex:1; min-width:200px; }
+    footer h3 { color:#ff6b6b; margin-bottom:10px; }
+    footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+    footer form input, footer form textarea { width:100%; padding:5px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc; }
+    footer button { background:#ff6b6b; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
+    footer button:hover { background:#ff4b4b; }
+
+    /* Responsive */
+    @media(max-width:1024px){
+      header h1 { font-size:1.8rem; }
+      header nav a { padding:6px 12px; font-size:0.95rem; }
+      main.container { margin:20px 2%; }
+    }
+    @media(max-width:768px){
+      header { flex-direction:column; align-items:flex-start; }
+      .table-wrapper { overflow-x:auto; }
+      table, th, td { font-size:0.85rem; }
+      footer { flex-direction:column; align-items:flex-start; }
+    }
+    @media(max-width:480px){
+      header h1 { font-size:1.5rem; margin-bottom:10px; }
+      header nav { width:100%; justify-content:flex-start; gap:10px; flex-wrap:wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>BikeRental</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <h2>Your Requests</h2>
+
+    <% if (!requests || requests.length === 0) { %>
+      <div class="card">No requests found.</div>
+    <% } else { %>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Bike</th>
+              <th>Days</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Requested On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% requests.forEach(r => { %>
+              <tr>
+                <td><%= r.bike ? r.bike.name : 'Deleted bike' %></td>
+                <td><%= r.days %></td>
+                <td>₹ <%= r.totalPrice %></td>
+                <td><%= r.status %></td>
+                <td><%= new Date(r.createdAt).toLocaleString() %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-section">
+      <h3>BikeRental</h3>
+      <p>Your trusted bike rental service.</p>
+      <p>© <%= new Date().getFullYear() %> BikeRental</p>
+    </div>
+    <div class="footer-section">
+      <h3>Links</h3>
+      <p><a href="/">Home</a></p>
+      <p><a href="/login">Login</a></p>
+      <p><a href="/signup">Signup</a></p>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Email: support@bikerental.com</p>
+      <p>Phone: +91 9876543210</p>
+      <p>Address: 123 Main St, City</p>
+    </div>
+    <div class="footer-section">
+      <h3>Feedback</h3>
+      <form action="/feedback" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" placeholder="Your feedback" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </footer>
+
+</body>
+</html>

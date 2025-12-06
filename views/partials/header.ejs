@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bike Rental System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a href="/">Home</a>
+
+  <% if (!session || !session.user) { %>
+      <a href="/login">Login</a>
+      <a href="/signup">Signup</a>
+  <% } else { %>
+      <% if (session.user.role === "admin") { %>
+          <a href="/admin/dashboard">Admin Dashboard</a>
+      <% } else { %>
+          <a href="/user/dashboard">User Dashboard</a>
+      <% } %>
+      <a href="/profile">Profile</a>
+      <a href="/logout">Logout</a>
+  <% } %>
+</nav>
