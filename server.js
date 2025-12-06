@@ -18,6 +18,8 @@ app.use(session({ secret: process.env.SESSION_SECRET || "secret123", resave: fal
 // set EJS
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use("/uploads", express.static("uploads"));
+
 
 // make user available in views as 'user'
 app.use((req, res, next) => {
