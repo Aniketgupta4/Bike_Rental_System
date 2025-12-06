@@ -4,7 +4,11 @@ const Booking = require("../models/Booking");
 // Admin Dashboard
 exports.dashboard = async (req, res) => {
   try {
-    const bookings = await Booking.find().populate("user").populate("bike").sort({ createdAt: -1 });
+    const bookings = await Booking.find()
+      .populate("user")
+      .populate("bike")
+      .sort({ createdAt: -1 });
+
     const bikes = await Bike.find();
     res.render("adminDashboard", {
       bookings: bookings || [],
@@ -26,16 +30,27 @@ exports.addBikePage = (req, res) => {
   res.render("addBike", { bike: null, user: req.session.user || null, message: null });
 };
 
-// POST Add Bike
+// POST Add Bike — CLOUDINARY VERSION
 exports.addBike = async (req, res) => {
   try {
     const { name, description, pricePerDay } = req.body;
-    const image = req.file ? req.file.filename : null;
-    await Bike.create({ name, description, pricePerDay, image });
+    const image = req.file ? req.file.path : null;  // Cloudinary URL
+
+    await Bike.create({
+      name,
+      description,
+      pricePerDay,
+      image
+    });
+
     res.redirect("/admin/dashboard");
   } catch (err) {
     console.error(err);
-    res.render("addBike", { bike: null, user: req.session.user || null, message: "Error adding bike" });
+    res.render("addBike", {
+      bike: null,
+      user: req.session.user || null,
+      message: "Error adding bike"
+    });
   }
 };
 
@@ -44,6 +59,7 @@ exports.editBikePage = async (req, res) => {
   try {
     const bike = await Bike.findById(req.params.id);
     if (!bike) return res.redirect("/admin/dashboard");
+
     res.render("editBike", { bike, user: req.session.user || null, message: null });
   } catch (err) {
     console.error(err);
@@ -51,13 +67,23 @@ exports.editBikePage = async (req, res) => {
   }
 };
 
-// POST Update Bike
+// POST Update Bike — CLOUDINARY VERSION
 exports.updateBike = async (req, res) => {
   try {
     const { name, description, pricePerDay, isAvailable } = req.body;
-    const image = req.file ? req.file.filename : undefined;
-    const data = { name, description, pricePerDay, isAvailable: isAvailable === "on" };
-    if (image) data.image = image;
+
+    const data = {
+      name,
+      description,
+      pricePerDay,
+      isAvailable: isAvailable === "on"
+    };
+
+    // If a new image is uploaded then replace
+    if (req.file && req.file.path) {
+      data.image = req.file.path; // Cloudinary URL
+    }
+
     await Bike.findByIdAndUpdate(req.params.id, data);
     res.redirect("/admin/dashboard");
   } catch (err) {

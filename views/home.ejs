@@ -135,7 +135,7 @@
         <% bikes.forEach(b => { %>
           <div class="card">
             <% if (b.image) { %>
-              <img src="/uploads/<%= b.image %>" class="thumb" alt="<%= b.name %>">
+              <img src="<%= b.image %>" class="thumb" alt="<%= b.name %>">
             <% } else { %>
               <img src="/uploads/default-bike.jpg" class="thumb" alt="Bike">
             <% } %>

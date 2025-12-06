@@ -181,14 +181,32 @@
 
 <div class="container">
   <h2>Edit Bike</h2>
-  <form class="form-box" action="/admin/edit-bike/<%= bike._id %>" method="POST" enctype="multipart/form-data">
-    <input name="name" value="<%= bike.name %>" required>
-    <input name="pricePerDay" type="number" value="<%= bike.pricePerDay %>" required>
-    <textarea name="description" rows="4"><%= bike.description %></textarea>
-    <label><input type="checkbox" name="isAvailable" <%= bike.isAvailable ? 'checked' : '' %> > Available</label>
-    <input name="image" type="file" accept="image/*">
-    <button class="btn" type="submit">Save</button>
-  </form>
+     <form class="form-box" action="/admin/edit-bike/<%= bike._id %>" method="POST" enctype="multipart/form-data">
+
+      <label>Bike Name</label>
+      <input type="text" name="name" value="<%= bike.name %>" required>
+
+      <label>Price Per Day (₹)</label>
+      <input type="number" name="pricePerDay" value="<%= bike.pricePerDay %>" required>
+
+      <label>Description</label>
+      <textarea name="description" rows="4" required><%= bike.description %></textarea>
+
+      <label class="checkbox-label">
+        <input type="checkbox" name="isAvailable" <%= bike.isAvailable ? 'checked' : '' %> > Available
+      </label>
+
+      <label>Bike Image</label>
+      <input type="file" name="image" accept="image/*">
+
+      <% if (bike.image) { %>
+        <div class="image-preview">
+          <img src="/uploads/<%= bike.image %>" alt="Bike Image">
+        </div>
+      <% } %>
+
+      <button class="btn" type="submit">Save Changes</button>
+    </form>
 </div>
 
  <footer>

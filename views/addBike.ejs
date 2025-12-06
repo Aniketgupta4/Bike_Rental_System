@@ -174,23 +174,35 @@ header nav a:hover {
       <div class="alert"><%= message %></div>
     <% } %>
 
-    <form action="<%= bike ? '/admin/edit-bike/' + bike._id : '/admin/add-bike' %>" method="POST" enctype="multipart/form-data">
-      <label>Name:</label>
-      <input type="text" name="name" value="<%= bike ? bike.name : '' %>" required>
+   <form action="<%= bike ? '/admin/edit-bike/' + bike._id : '/admin/add-bike' %>" 
+      method="POST" enctype="multipart/form-data" class="bike-form">
 
-      <label>Price Per Day:</label>
-      <input type="number" name="pricePerDay" value="<%= bike ? bike.pricePerDay : '' %>" required>
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= bike ? bike.name : '' %>" required>
 
-      <label>Description:</label>
-      <textarea name="description"><%= bike ? bike.description : '' %></textarea>
+  <label>Price Per Day:</label>
+  <input type="number" name="pricePerDay" value="<%= bike ? bike.pricePerDay : '' %>" required>
 
-      <label><input type="checkbox" name="isAvailable" <%= bike && bike.isAvailable ? 'checked' : '' %>> Available</label>
+  <label>Description:</label>
+  <textarea name="description" rows="3"><%= bike ? bike.description : '' %></textarea>
 
-      <label>Image:</label>
-      <input type="file" name="image">
+  <label>
+    <input type="checkbox" name="isAvailable" <%= bike && bike.isAvailable ? 'checked' : '' %>> Available
+  </label>
 
-      <button type="submit"><%= bike ? "Update Bike" : "Add Bike" %></button>
-    </form>
+  <label>Image:</label>
+  <% if (bike && bike.image) { %>
+    <div class="preview-box">
+      <img src="<%= bike.image %>" alt="Bike Image" class="preview-img">
+    </div>
+  <% } %>
+  <input type="file" name="image">
+
+  <button type="submit" class="submit-btn">
+    <%= bike ? "Update Bike" : "Add Bike" %>
+  </button>
+</form>
+
   </div>
 </main>
 

@@ -1,16 +1,10 @@
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
 const router = express.Router();
 const adminCtrl = require("../controllers/adminController");
 const { ensureAdmin } = require("../middleware/auth");
 
-// multer setup
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "public/uploads"),
-  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
-});
-const upload = multer({ storage });
+// NEW — Cloudinary Multer import
+const upload = require("../config/upload");   // we created this file earlier
 
 router.get("/admin/dashboard", ensureAdmin, adminCtrl.dashboard);
 
