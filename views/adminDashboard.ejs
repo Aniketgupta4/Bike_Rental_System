@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <title>Admin Dashboard - Bike Rental</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    /* Reset & base */
+    /* ---------------------------------------------------- */
+    /* 1. RESET & BASE STYLES */
+    /* ---------------------------------------------------- */
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
     html, body { height:100%; }
     body {
@@ -13,109 +17,224 @@
       display:flex; flex-direction:column;
     }
 
-    /* Header/Navbar */
+    /* ---------------------------------------------------- */
+    /* 2. HEADER/NAVBAR STYLES (Mobile-first Setup) */
+    /* ---------------------------------------------------- */
     header {
-      background:#1e1e2f; color:#fff; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+      background:#1e1e2f; color:#fff; padding:15px 5%; 
+      display:flex; justify-content:space-between; align-items:center; 
       box-shadow:0 2px 8px rgba(0,0,0,0.2);
     }
     header h1 { color:#ff6b6b; font-size:2rem; }
-    header nav { display:flex; gap:15px; flex-wrap:wrap; }
+    
+    /* Default - Desktop View */
+    header nav { 
+        display:flex; gap:15px; 
+    }
     header nav a {
-      color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; transition:0.3s; font-weight:500;
+      color:#fff; text-decoration:none; padding:8px 16px; 
+      border-radius:6px; transition:0.3s; font-weight:500;
     }
     header nav a:hover { background:#ff6b6b; }
+    
+    /* Menu Toggle Button - Desktop पर Hide */
+    .menu-toggle {
+        display: none; 
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 5px;
+    }
 
-    /* MAIN center fix */
+    /* ---------------------------------------------------- */
+    /* 3. MAIN CONTENT */
+    /* ---------------------------------------------------- */
     main.container {
-      width:90%; max-width:1200px; margin:auto;
+      width:95%; /* चौड़ाई थोड़ी बढ़ाई */
+      max-width:1200px; margin:auto;
       flex-grow:1; padding:25px 0;
       display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
       text-align:center;
     }
 
     h2 { margin:20px 0; color:#1e1e2f; }
+    .action-row { margin-bottom: 20px; width: 100%; max-width: 1200px; text-align: left;}
 
-    /* Buttons */
+    /* Buttons (Same as before) */
     .btn {
-      display:inline-block; padding:6px 12px; border:none; border-radius:6px; color:#fff;
+      display:inline-block; padding:8px 15px; border:none; border-radius:6px; color:#fff;
       background:#ff6b6b; cursor:pointer; transition:0.3s; text-decoration:none; font-weight:500; font-size:0.9rem;
     }
     .btn:hover { background:#ff4b4b; }
-    .btn.small { padding:4px 8px; font-size:0.8rem; }
+    .btn.small { padding:6px 10px; font-size:0.75rem; }
     .btn.danger { background:#e63946; }
     .btn.danger:hover { background:#c5303f; }
-
-    /* Table */
-    table { width:100%; border-collapse:collapse; margin:30px auto; }
-    table th, table td { padding:12px 15px; border-bottom:1px solid #ddd; text-align:center; }
-    table th { background:#ff6b6b; color:#fff; font-weight:600; }
-    table tr:hover { background:#f1f1f1; }
-    .small-note { font-size:0.8rem; color:#777; }
+    .btn-group .btn { margin: 2px; }
 
     /* Cards */
     .card {
-      background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      background:#fff; padding:15px; border-radius:10px; 
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
       margin:10px 0; width:100%; max-width:450px;
     }
 
-    /* FOOTER Always Bottom */
+    /* ---------------------------------------------------- */
+    /* 4. TABLE STYLES - Mobile Optimization */
+    /* ---------------------------------------------------- */
+    table { width:100%; border-collapse:collapse; margin:30px auto; background: #fff; border-radius: 8px; overflow: hidden; }
+    table th, table td { padding:12px 10px; border-bottom:1px solid #eee; text-align:center; }
+    table th { background:#1e1e2f; color:#fff; font-weight:600; text-transform: uppercase; font-size: 0.8rem;}
+    table tr:last-child td { border-bottom: none; }
+    table tr:nth-child(even) { background:#f9f9f9; }
+    table tr:hover { background:#ffe8e8; }
+    .small-note { font-size:0.8rem; color:#777; }
+    
+    /* Status styling */
+    td span.status {
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 0.8rem;
+        display: inline-block;
+        white-space: nowrap;
+    }
+    .status-pending { background-color: #ffe0b2; color: #fb8c00; }
+    .status-approved { background-color: #c8e6c9; color: #388e3c; }
+    .status-rejected { background-color: #ffcdd2; color: #d32f2f; }
+
+
+    /* ---------------------------------------------------- */
+    /* 5. FOOTER STYLES */
+    /* ---------------------------------------------------- */
     footer {
       background:#1e1e2f; color:#fff; padding:30px 5%; margin-top:auto;
       display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
+      text-align: left;
     }
     footer .footer-section { flex:1; min-width:200px; }
     footer h3 { color:#ff6b6b; margin-bottom:10px; }
     footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; }
     footer a:hover { text-decoration:underline; }
+    footer form input, footer form textarea { border: none; }
 
-    /* Responsive */
-    @media (max-width:768px){
-      table, thead, tbody, th, td, tr { display:block; }
-      table tr { margin-bottom:15px; }
-      table td { padding-left:50%; position:relative; text-align:left; }
-      table td::before {
-        position:absolute; top:12px; left:12px; width:45%; white-space:nowrap; font-weight:bold;
+
+    /* ---------------------------------------------------- */
+    /* 6. RESPONSIVE STYLES (< 768px - Tablet/Mobile) */
+    /* ---------------------------------------------------- */
+    @media (max-width: 768px){
+      
+      /* **NAVIGATION HACK - Hamburger Menu** */
+      header {
+          flex-wrap: nowrap; 
+          align-items: center; 
+          padding: 15px 5%;
       }
-      table td:nth-of-type(1)::before { content:"User/Bike"; }
-      table td:nth-of-type(2)::before { content:"Bike/Price"; }
-      table td:nth-of-type(3)::before { content:"Days"; }
-      table td:nth-of-type(4)::before { content:"Pickup Date & Time"; }
-      table td:nth-of-type(5)::before { content:"Return Date"; }
-      table td:nth-of-type(6)::before { content:"Total"; }
-      table td:nth-of-type(7)::before { content:"Status"; }
-      table td:nth-of-type(8)::before { content:"Action"; }
+      .menu-toggle {
+          display: block; /* मोबाइल पर दिखाएँ */
+      }
+      header nav {
+          /* मोबाइल पर नेविगेशन को डिफ़ॉल्ट रूप से छिपाएँ */
+          display: none; 
+          flex-direction: column; /* लिंक को एक के ऊपर एक रखें */
+          position: absolute; /* header के नीचे ओवरले करें */
+          top: 60px; /* header की ऊंचाई से नीचे */
+          left: 0;
+          width: 100%; 
+          background: #333; /* मेनू का बैकग्राउंड */
+          z-index: 1000;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      }
+      header nav a {
+          width: 100%;
+          text-align: center;
+          padding: 12px 20px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      header nav.active { 
+          display: flex; /* JavaScript से दिखाने के लिए */
+      }
+
+      /* **TABLE RESPONSIVENESS (कार्ड व्यू)** */
+      table { border: 1px solid #ddd; }
+      table thead { display: none; } /* डेस्कटॉप हेडर छिपाएँ */
+      table, tbody, tr, td { display: block; width: 100%; }
+      table tr { margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+      table td { 
+          padding-left: 50%; /* लेबल के लिए जगह */
+          position: relative; 
+          text-align: right; 
+          border-bottom: 1px solid #eee;
+          font-size: 0.9rem;
+      }
+      table td:last-child { border-bottom: none; }
+
+      /* Custom Data Labels (Mobile View) */
+      table td::before {
+        content: attr(data-label); /* data-label से कंटेंट लें */
+        position:absolute; top:12px; left:12px; width:45%; 
+        white-space:nowrap; font-weight:bold; color: #1e1e2f;
+        text-align: left;
+      }
+
+      /* Action Buttons Stack */
+      table td:last-child {
+          text-align: center;
+          padding: 10px 12px;
+      }
+      table td .btn-group {
+          display: flex;
+          justify-content: center;
+          gap: 5px;
+      }
+      
+      /* **FOOTER RESPONSIVENESS** */
+      footer {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+      }
+      footer .footer-section {
+          min-width: 90%;
+          margin-bottom: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <h1>BikeRental</h1>
-    <nav>
+    <button class="menu-toggle" aria-controls="navbarNav" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i> </button>
+    <nav id="navbarNav">
       <a href="/">Home</a>
       <a href="/logout">Logout</a>
     </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
   <main class="container">
 
     <h2>Manage Bikes</h2>
-    <a class="btn" href="/admin/add-bike">+ Add Bike</a>
-    <br><br>
+    <div class="action-row">
+        <a class="btn" href="/admin/add-bike">+ Add Bike</a>
+    </div>
 
     <% if (!bikes || bikes.length === 0) { %>
       <div class="card">No bikes.</div>
     <% } else { %>
       <table>
-        <tr><th>Name</th><th>Price</th><th>Available</th><th>Actions</th></tr>
+        <thead>
+            <tr><th>Name</th><th>Price</th><th>Available</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
         <% bikes.forEach(b => { %>
           <tr>
-            <td><%= b.name %></td>
-            <td>₹ <%= b.pricePerDay %></td>
-            <td><%= b.isAvailable ? "Yes" : "No" %></td>
-            <td>
+            <td data-label="Name"><%= b.name %></td>
+            <td data-label="Price">₹ <%= b.pricePerDay %></td>
+            <td data-label="Available"><span class="status <%= b.isAvailable ? 'status-approved' : 'status-rejected' %>"><%= b.isAvailable ? "Yes" : "No" %></span></td>
+            <td data-label="Actions" class="btn-group">
               <a class="btn small" href="/admin/edit-bike/<%= b._id %>">Edit</a>
               <form style="display:inline" action="/admin/delete-bike/<%= b._id %>" method="POST">
                 <button class="btn small danger" type="submit">Delete</button>
@@ -123,6 +242,7 @@
             </td>
           </tr>
         <% }) %>
+        </tbody>
       </table>
     <% } %>
 
@@ -131,28 +251,30 @@
       <div class="card">No booking requests.</div>
     <% } else { %>
       <table>
-        <tr>
-          <th>User</th>
-          <th>Bike</th>
-          <th>Days</th>
-          <th>Request-Date-Time</th>
-          <th>Return Date</th>
-          <th>Total</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
+        <thead>
+            <tr>
+              <th>User</th>
+              <th>Bike</th>
+              <th>Days</th>
+              <th>Request-Date-Time</th>
+              <th>Return Date</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
         <% bookings.forEach(bk => { %>
           <tr>
-            <td><%= bk.user ? bk.user.name : "Deleted user" %></td>
-            <td><%= bk.bike ? bk.bike.name : "Deleted bike" %></td>
-            <td><%= bk.days %></td>
-            <td><%= bk.createdAt ? new Date(bk.createdAt).toLocaleString() : "N/A" %></td>
+            <td data-label="User"><%= bk.user ? bk.user.name : "Deleted user" %></td>
+            <td data-label="Bike"><%= bk.bike ? bk.bike.name : "Deleted bike" %></td>
+            <td data-label="Days"><%= bk.days %></td>
+            <td data-label="Request Date/Time"><%= bk.createdAt ? new Date(bk.createdAt).toLocaleString() : "N/A" %></td>
 
-            <!-- Return Date -->
-            <td>
+            <td data-label="Return Date">
               <% if (bk.createdAt && bk.days) { 
-                   let returnDate = new Date(bk.createdAt);
-                   returnDate.setDate(returnDate.getDate() + bk.days);
+                    let returnDate = new Date(bk.createdAt);
+                    returnDate.setDate(returnDate.getDate() + bk.days);
               %>
                 <%= returnDate.toLocaleDateString() %>
               <% } else { %>
@@ -160,9 +282,11 @@
               <% } %>
             </td>
 
-            <td>₹ <%= bk.totalPrice %></td>
-            <td><%= bk.status %></td>
-            <td>
+            <td data-label="Total">₹ <%= bk.totalPrice %></td>
+            <td data-label="Status">
+                <span class="status status-<%= bk.status %>"><%= bk.status %></span>
+            </td>
+            <td data-label="Action" class="btn-group">
               <% if (bk.status === 'pending') { %>
                 <a class="btn small" href="/admin/approve/<%= bk._id %>">Approve</a>
                 <a class="btn small danger" href="/admin/reject/<%= bk._id %>">Reject</a>
@@ -172,11 +296,11 @@
             </td>
           </tr>
         <% }) %>
+        </tbody>
       </table>
     <% } %>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-section">
       <h3>BikeRental</h3>
@@ -198,13 +322,26 @@
     <div class="footer-section">
       <h3>Feedback</h3>
       <form action="/feedback" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required style="width:100%; margin-bottom:5px; padding:5px;">
-        <input type="email" name="email" placeholder="Email" required style="width:100%; margin-bottom:5px; padding:5px;">
-        <textarea name="message" placeholder="Your feedback" required style="width:100%; padding:5px;"></textarea>
+        <input type="text" name="name" placeholder="Your Name" required style="width:100%; margin-bottom:5px; padding:8px; border-radius: 4px;">
+        <input type="email" name="email" placeholder="Email" required style="width:100%; margin-bottom:5px; padding:8px; border-radius: 4px;">
+        <textarea name="message" placeholder="Your feedback" required style="width:100%; padding:8px; border-radius: 4px;"></textarea>
         <button type="submit" class="btn" style="margin-top:5px;">Send</button>
       </form>
     </div>
   </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navBar = document.getElementById('navbarNav');
+
+      menuToggle.addEventListener('click', () => {
+        navBar.classList.toggle('active'); 
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
+      });
+    });
+  </script>
 
 </body>
 </html>

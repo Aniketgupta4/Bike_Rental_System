@@ -1,202 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title><%= bike.name %> - BikeRental</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-    body { background: #f5f5f8; color: #111; }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= bike.name %> - BikeRental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+/* Reset and Base Styles */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { background: #f5f5f8; color: #111; }
 
-    /* Navbar */
-    header {
-      background: #1b1b2f;
-      color: #ff6b6b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
+/* 1. Navbar (Desktop Styles) */
+header {
+    background: #1b1b2f;
+    color: #ff6b6b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: relative; /* Essential for mobile dropdown positioning */
+}
+header .brand {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+header nav {
+    display: flex; /* Desktop: links side by side */
+}
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: .3s ease;
+}
+header nav a:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+/* Hamburger Menu Icon (Hidden on Desktop) */
+.menu-toggle {
+    display: none; /* Hide by default on desktop */
+    cursor: pointer;
+    font-size: 2rem;
+    color: #fff;
+    border: none;
+    background: transparent;
+    z-index: 100;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 7px 18px rgba(0,0,0,0.12);
+}
+
+.detail-wrap {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.thumb {
+    width: 340px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    transition: .3s ease;
+}
+.thumb:hover {
+    transform: scale(1.03);
+}
+
+h2 { font-size: 2rem; color: #1b1b2f; margin-bottom: .8rem; }
+p { font-size: 1.05rem; margin: .4rem 0; line-height: 1.5; }
+
+form label { font-size: 1rem; font-weight: 500; }
+form input {
+    width: 60px;
+    padding: .4rem;
+    margin-left: .4rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.btn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.btn:hover {
+    background: #ff4c4c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(255, 107, 107, .3);
+}
+
+.small-note { font-size: .9rem; color: #777; margin-top: .8rem; }
+
+/* 2. Footer Styles (Updated for left/center alignment) */
+footer {
+    background:#1e1e2f; 
+    color:#fff; 
+    padding:30px 5%; 
+    display:flex; 
+    flex-wrap:wrap; 
+    justify-content:space-between; 
+    gap:20px;
+    text-align: left; /* Default left alignment */
+}
+footer .footer-section { 
+    flex:1; 
+    min-width:200px; 
+    /* Ensures content is center-aligned within the section on small screens */
+    /* text-align: center; /* Removed to keep content left-aligned */
+}
+footer h3 { color:#ff6b6b; margin-bottom:10px; }
+footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; display: block; } /* display:block for left-aligning links */
+footer a:hover { text-decoration:underline; }
+footer form input, footer form textarea { 
+    width:100%; 
+    padding:5px; 
+    margin-bottom:5px; 
+    border-radius:5px; 
+    border:1px solid #ccc; 
+    color: #111; /* Ensure text is visible in input */
+}
+footer button { background:#ff6b6b; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
+footer button:hover { background:#ff4b4b; }
+
+/* RESPONSIVE MEDIA QUERY */
+@media(max-width: 768px){
+    /* 1. Navbar Mobile Dropdown */
+    .menu-toggle {
+        display: block; /* Show the hamburger icon */
     }
-    header .brand {
-      font-size: 1.7rem;
-      font-weight: 700;
+
+    header nav {
+        display: none; /* Hide navigation links by default */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Start right below the header */
+        right: 0;
+        width: 100%; /* Takes full width of the header */
+        background: #1b1b2f;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 90;
+        padding: 0.5rem 0; /* Minimal padding */
+        border-top: 1px solid #333;
     }
+
+    header nav.active {
+        display: flex; /* Show the menu when 'active' class is added by JS */
+    }
+
     header nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: .3s ease;
+        margin: 0;
+        padding: 0.8rem 2rem; /* Give padding for better click area */
+        width: 100%;
+        text-align: left; /* Aligned to the left */
+        border-radius: 0;
     }
     header nav a:hover {
-      background: #ff6b6b;
-      color: #fff;
-      transform: translateY(-2px);
+        background: #333;
     }
 
-    /* Container */
+    /* Main Content Adjustments */
     .container {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 7px 18px rgba(0,0,0,0.12);
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 8px;
     }
-
+    
     .detail-wrap {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
     .thumb {
-      width: 340px;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-      transition: .3s ease;
-    }
-    .thumb:hover {
-      transform: scale(1.03);
+        width: 100%;
+        height: auto;
+        max-height: 300px;
     }
 
-    h2 { font-size: 2rem; color: #1b1b2f; margin-bottom: .8rem; }
-    p { font-size: 1.05rem; margin: .4rem 0; line-height: 1.5; }
-
-    form label { font-size: 1rem; font-weight: 500; }
-    form input {
-      width: 60px;
-      padding: .4rem;
-      margin-left: .4rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
+    /* 2. Footer Left Alignment on Mobile */
+    footer {
+        flex-direction: column;
+        align-items: flex-start; /* Align all footer sections to the left */
+        padding: 20px 5%;
+    }
+    footer .footer-section {
+        min-width: 100%;
+        margin-bottom: 15px;
     }
 
-    .btn {
-      margin-top: 1rem;
-      width: 100%;
-      padding: 0.85rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      background: #ff6b6b;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-    .btn:hover {
-      background: #ff4c4c;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 12px rgba(255, 107, 107, .3);
-    }
-
-    .small-note { font-size: .9rem; color: #777; margin-top: .8rem; }
-
-    /* Footer */
-    
- footer {
-      background:#1e1e2f; color:#fff; padding:30px 5%; display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
-    }
-    footer .footer-section { flex:1; min-width:200px; }
-    footer h3 { color:#ff6b6b; margin-bottom:10px; }
-    footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; }
-    footer a:hover { text-decoration:underline; }
-    footer form input, footer form textarea { width:100%; padding:5px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc; }
-    footer button { background:#ff6b6b; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
-    footer button:hover { background:#ff4b4b; }
-
-    /* RESPONSIVE */
-    @media(max-width:768px){
-      main.container { padding:20px 5%; }
-      .form-box { padding:30px 20px; }
-      header h1 { font-size:1.8rem; }
-    }
-    @media(max-width:480px){
-      header { flex-direction:column; align-items:flex-start; }
-      header nav { width:100%; justify-content:flex-start; gap:10px; flex-wrap:wrap; }
-      header h1 { font-size:1.5rem; margin-bottom:10px; }
-    }
-
-  </style>
+    /* This was causing issues in original code */
+    /* @media(max-width:480px){
+        header { flex-direction:column; align-items:flex-start; }
+        header nav { width:100%; justify-content:flex-start; gap:10px; flex-wrap:wrap; }
+        header h1 { font-size:1.5rem; margin-bottom:10px; }
+    } */
+}
+    </style>
 </head>
 <body>
 
 <header>
-  <div class="brand">BikeRental</div>
-  <nav>
-    <a href="/">Home</a>
-    <% if (user) { %>
-      <% if (user.role === 'admin') { %>
-        <a href="/admin/dashboard">Dashboard</a>
-      <% } %>
-      <a href="/logout">Logout</a>
-    <% } else { %>
-      <a href="/login">Login</a>
-      <a href="/signup">Signup</a>
-    <% } %>
-  </nav>
+    <div class="brand">BikeRental</div>
+    
+    <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button> 
+
+    <nav id="nav-menu">
+        <a href="/">Home</a>
+        <% if (user) { %>
+            <% if (user.role === 'admin') { %>
+                <a href="/admin/dashboard">Dashboard</a>
+            <% } %>
+            <a href="/logout">Logout</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+        <% } %>
+    </nav>
 </header>
 
 <main class="container">
-  <div class="detail-wrap">
-    <% if (bike.image) { %>
-      <img src="<%= bike.image %>" class="thumb" alt="<%= bike.name %>">
-    <% } %>
+    <div class="detail-wrap">
+        <% if (bike.image) { %>
+            <img src="<%= bike.image %>" class="thumb" alt="<%= bike.name %>">
+        <% } %>
 
-    <div>
-      <h2><%= bike.name %></h2>
-      <p><%= bike.description %></p>
-      <p><strong>₹ <%= bike.pricePerDay %> / day</strong></p>
+        <div>
+            <h2><%= bike.name %></h2>
+            <p><%= bike.description %></p>
+            <p><strong>₹ <%= bike.pricePerDay %> / day</strong></p>
 
-      <% if (user && user.role === 'user') { %>
-        <form action="/user/book/<%= bike._id %>" method="POST">
-          <label>Days:
-            <input name="days" type="number" min="1" value="1" required>
-          </label>
-          <button class="btn">Request Booking</button>
-        </form>
-      <% } else { %>
-        <p class="small-note">Login as user to request booking.</p>
-      <% } %>
+            <% if (user && user.role === 'user') { %>
+                <form action="/user/book/<%= bike._id %>" method="POST">
+                    <label>Days:
+                        <input name="days" type="number" min="1" value="1" required>
+                    </label>
+                    <button class="btn">Request Booking</button>
+                </form>
+            <% } else { %>
+                <p class="small-note">Login as user to request booking.</p>
+            <% } %>
+        </div>
     </div>
-  </div>
 </main>
 
-  <footer>
+<footer>
     <div class="footer-section">
-      <h3>BikeRental</h3>
-      <p>Your trusted bike rental service.</p>
-      <p>© <%= new Date().getFullYear() %> BikeRental</p>
+        <h3>BikeRental</h3>
+        <p>Your trusted bike rental service.</p>
+        <p>© <%= new Date().getFullYear() %> BikeRental</p>
     </div>
     <div class="footer-section">
-      <h3>Links</h3>
-      <p><a href="/">Home</a></p>
-      <p><a href="/login">Login</a></p>
-      <p><a href="/signup">Signup</a></p>
+        <h3>Links</h3>
+        <p><a href="/">Home</a></p>
+        <p><a href="/login">Login</a></p>
+        <p><a href="/signup">Signup</a></p>
     </div>
     <div class="footer-section">
-      <h3>Contact</h3>
-      <p>Email: support@bikerental.com</p>
-      <p>Phone: +91 9876543210</p>
-      <p>Address: 123 Main St, City</p>
+        <h3>Contact</h3>
+        <p>Email: support@bikerental.com</p>
+        <p>Phone: +91 9876543210</p>
+        <p>Address: 123 Main St, City</p>
     </div>
     <div class="footer-section">
-      <h3>Feedback</h3>
-      <form action="/feedback" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Your feedback" required></textarea>
-        <button type="submit">Send</button>
-      </form>
+        <h3>Feedback</h3>
+        <form action="/feedback" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" placeholder="Your feedback" required></textarea>
+            <button type="submit">Send</button>
+        </form>
     </div>
-  </footer>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            // Toggles the 'active' class on the navigation menu
+            navMenu.classList.toggle('active'); 
+        });
+    });
+</script>
 
 </body>
 </html>

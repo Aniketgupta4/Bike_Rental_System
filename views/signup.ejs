@@ -2,133 +2,244 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <title>Signup - BikeRental</title>
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* Reset & body */
+    /* Global Reset & Base Styles */
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-    body { background:#f4f4f9; color:#333; min-height:100vh; display:flex; flex-direction:column; }
+    body { 
+      background:#f4f4f9; color:#333; min-height:100vh; 
+      display:flex; flex-direction:column; 
+    }
 
     /* HEADER */
     header {
-      background:#1e1e2f; color:#fff; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+      background:#1e1e2f; color:#fff; padding:15px 6%;
+      display:flex; justify-content:space-between; align-items:center;
       box-shadow:0 2px 8px rgba(0,0,0,0.2);
     }
-    header h1 { color:#ff6b6b; font-size:2rem; }
-    header nav { display:flex; gap:15px; flex-wrap:wrap; }
-    header nav a {
-      color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; transition:0.3s; font-weight:500;
+    header h1 { color:#ff6b6b; font-size:2rem; font-weight:700; }
+    /* Nav Menu Styles */
+    nav { 
+      display:flex; 
+      gap:20px; 
+      transition: all 0.3s ease; /* For smooth mobile menu transition */
     }
-    header nav a:hover { background:#ff6b6b; }
+    nav a {
+      color:#fff; text-decoration:none; font-weight:500;
+      padding:8px 16px; border-radius:6px; transition:.3s;
+      white-space: nowrap; /* Prevent links from wrapping */
+    }
+    nav a:hover { background:#ff6b6b; }
 
-    /* MAIN CONTAINER */
-    main.container { flex:1; display:flex; justify-content:center; align-items:center; padding:40px 5%; }
+    /* Hamburger Menu Icon (Initially Hidden) */
+    .menu-icon {
+      display: none; /* Hide on desktop */
+      cursor: pointer;
+      font-size: 2rem; /* Size of the three lines icon */
+      color: #fff;
+    }
 
-    /* FORM BOX */
+    /* SIGNUP BOX */
+    main.container {
+      flex:1;
+      display:flex; justify-content:center; align-items:center;
+      padding:60px 20px;
+    }
     .form-box {
-      background:#fff; padding:40px 30px; border-radius:12px; width:100%; max-width:400px; box-shadow:0 4px 20px rgba(0,0,0,0.15);
-      text-align:center; transition:0.3s;
+      background:#fff;
+      width:100%; max-width:400px;
+      padding:45px 32px;
+      border-radius:12px;
+      box-shadow:0 5px 30px rgba(0,0,0,0.18);
+      text-align:center;
     }
-    .form-box:hover { box-shadow:0 6px 25px rgba(0,0,0,0.2); }
-
-    .form-box h2 { color:#1e1e2f; margin-bottom:25px; font-size:1.8rem; }
-
+    .form-box h2 {
+      font-size:2rem; margin-bottom:25px; color:#1e1e2f; font-weight:600;
+    }
     .form-box input, .form-box select {
-      width:100%; padding:12px 15px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px; font-size:1rem;
-      transition:0.3s;
+      width:100%; padding:13px 15px; margin-bottom:15px;
+      border-radius:6px; border:1px solid #ccc; font-size:1rem;
+      transition:.3s;
     }
-    .form-box input:focus, .form-box select:focus { border-color:#ff6b6b; outline:none; box-shadow:0 0 5px rgba(255,107,107,0.4); }
-
+    .form-box input:focus, .form-box select:focus {
+      border-color:#ff6b6b;
+      box-shadow:0 0 5px rgba(255,107,107,.4);
+      outline:none;
+    }
     .form-box button.btn {
-      width:100%; padding:12px; background:#ff6b6b; border:none; color:#fff; font-size:1rem; border-radius:6px; cursor:pointer; transition:0.3s;
+      width:100%; padding:13px; font-size:1rem;
+      background:#ff6b6b; border:none; color:#fff; cursor:pointer;
+      border-radius:6px; transition:.3s;
+      font-weight: 600;
     }
     .form-box button.btn:hover { background:#ff4b4b; }
-
-    .form-box p { margin-top:15px; font-size:0.9rem; color:#555; }
-    .form-box p a { color:#ff6b6b; text-decoration:none; font-weight:500; }
-    .form-box p a:hover { text-decoration:underline; }
+    .form-box p { margin-top:15px; font-size:.9rem; }
+    .form-box a { color:#ff6b6b; font-weight:600; text-decoration:none; }
+    .form-box a:hover { text-decoration:underline; }
 
     .alert {
-      background:#ffeded; color:#d8000c; padding:10px 15px; border-radius:6px; margin-bottom:15px; font-size:0.9rem;
+      background:#ffeded; color:#d8000c;
+      padding:10px 15px; border-radius:6px;
+      margin-bottom:15px;
+      font-size:.9rem;
     }
 
     /* FOOTER */
     footer {
-      background:#1e1e2f; color:#fff; padding:30px 5%; display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
+      background:#1e1e2f; color:#fff;
+      padding:35px 6%;
+      display:flex; justify-content:space-between;
+      flex-wrap:wrap; gap:30px; /* Increased gap for better mobile spacing */
     }
-    footer .footer-section { flex:1; min-width:200px; }
-    footer h3 { color:#ff6b6b; margin-bottom:10px; }
-    footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; }
+    footer .footer-section { flex:1; min-width:220px; } /* Slightly wider min-width */
+    footer h3 { color:#ff6b6b; margin-bottom:12px; font-size:1.2rem; }
+    footer a, footer p { color:#fff; text-decoration:none; font-size:0.95rem; line-height:1.6;}
     footer a:hover { text-decoration:underline; }
-    footer form input, footer form textarea { width:100%; padding:5px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc; }
-    footer button { background:#ff6b6b; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
+    footer form input, footer form textarea {
+      width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;
+      background: #33334d; /* Darker input background */
+      color: #fff;
+    }
+    footer form input::placeholder, footer form textarea::placeholder {
+      color: #ccc;
+    }
+    footer button {
+      background:#ff6b6b; border:none; color:#fff;
+      padding:10px 15px; border-radius:6px; cursor:pointer; transition:.3s;
+      font-weight: 600;
+    }
     footer button:hover { background:#ff4b4b; }
 
-    /* RESPONSIVE */
+    /* --- RESPONSIVE STYLES --- */
     @media(max-width:768px){
-      main.container { padding:20px 5%; }
-      .form-box { padding:30px 20px; }
-      header h1 { font-size:1.8rem; }
+      /* General mobile adjustments */
+      header h1 { font-size:1.7rem; }
+      main.container { padding:30px 5%; }
+      .form-box { padding:35px 24px; }
     }
-    @media(max-width:480px){
-      header { flex-direction:column; align-items:flex-start; }
-      header nav { width:100%; justify-content:flex-start; gap:10px; flex-wrap:wrap; }
-      header h1 { font-size:1.5rem; margin-bottom:10px; }
+
+    @media(max-width:600px){
+      /* For very small screens (like iPhone SE/Mobile View) */
+      
+      header {
+        padding: 15px 5%; /* Reduce horizontal padding */
+      }
+      
+      /* Hamburger Menu Toggler */
+      .menu-icon {
+        display: block; /* Show hamburger icon on mobile */
+      }
+      
+      /* Hide regular menu and position it for mobile */
+      nav {
+        display: none; /* Initially hide the navigation links */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Below the header */
+        left: 0;
+        width: 100%;
+        background: #1e1e2f;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        padding: 10px 0;
+        border-top: 1px solid #333;
+      }
+      
+      /* Show the menu when the 'open' class is added by JS */
+      nav.open {
+        display: flex;
+      }
+      
+      nav a {
+        padding: 12px 20px; /* Increase padding for touch targets */
+        border-radius: 0;
+        text-align: left;
+        width: 100%;
+      }
+      nav a:hover {
+          background: #33334d;
+      }
+
+      /* Signup Box */
+      .form-box {
+        padding: 30px 20px;
+        max-width: 100%; /* Use full width on very small screens */
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      }
+      .form-box h2 {
+          font-size: 1.75rem;
+      }
+      .form-box input, .form-box select, .form-box button.btn {
+          padding: 15px; /* Bigger touch targets */
+          font-size: 1.05rem;
+      }
+      
+      /* Footer */
+      footer {
+        flex-direction: column;
+        text-align: left; /* Keep text left-aligned in sections for readability */
+        padding: 30px 5%;
+        gap: 30px;
+      }
+      footer .footer-section { min-width:100%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <h1>BikeRental</h1>
-    <nav>
+    <div class="menu-icon" id="menu-icon">☰</div> 
+    
+    <nav id="navbar">
       <a href="/">Home</a>
       <a href="/login">Login</a>
     </nav>
   </header>
 
-  <!-- SIGNUP FORM -->
   <main class="container">
     <div class="form-box">
-      <h2>Signup</h2>
-      <% if (typeof message !== 'undefined' && message) { %>
+      <h2>Create Account</h2> <% if (typeof message !== 'undefined' && message) { %>
         <div class="alert"><%= message %></div>
       <% } %>
+
       <form action="/signup" method="POST">
         <input type="text" name="name" placeholder="Full Name" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
         <select name="role" required>
           <option value="user">User</option>
-          <!-- create admins here  -->
-          <!-- <option value="admin">Admin</option> -->
         </select>
         <button class="btn" type="submit">Create Account</button>
       </form>
+
       <p>Already have an account? <a href="/login">Login</a></p>
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-section">
       <h3>BikeRental</h3>
       <p>Your trusted bike rental service.</p>
       <p>© <%= new Date().getFullYear() %> BikeRental</p>
     </div>
+
     <div class="footer-section">
       <h3>Links</h3>
       <p><a href="/">Home</a></p>
       <p><a href="/login">Login</a></p>
       <p><a href="/signup">Signup</a></p>
     </div>
+
     <div class="footer-section">
       <h3>Contact</h3>
       <p>Email: support@bikerental.com</p>
       <p>Phone: +91 9876543210</p>
       <p>Address: 123 Main St, City</p>
     </div>
+
     <div class="footer-section">
       <h3>Feedback</h3>
       <form action="/feedback" method="POST">
@@ -139,6 +250,13 @@
       </form>
     </div>
   </footer>
+
+  <script>
+    document.getElementById('menu-icon').addEventListener('click', function() {
+      var navbar = document.getElementById('navbar');
+      navbar.classList.toggle('open');
+    });
+  </script>
 
 </body>
 </html>

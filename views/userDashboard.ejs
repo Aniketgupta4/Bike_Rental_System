@@ -1,175 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>User Dashboard - BikeRental</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-    body { background:#f4f4f9; color:#333; line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>User Dashboard - BikeRental</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* General Reset & Typography */
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+        body { background:#f4f4f9; color:#333; line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
 
-    /* HEADER */
-    header {
-      background:#1e1e2f; color:#fff; padding:15px 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
-      box-shadow:0 2px 8px rgba(0,0,0,0.2);
-    }
-    header h1 { color:#ff6b6b; font-size:2rem; }
-    header nav { display:flex; gap:15px; flex-wrap:wrap; }
-    header nav a {
-      color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; transition:0.3s; font-weight:500;
-    }
-    header nav a:hover { background:#ff6b6b; }
+        /* HEADER */
+        header {
+            background:#1e1e2f; color:#fff; padding:15px 5%; display:flex; justify-content:space-between; align-items:center;
+            box-shadow:0 2px 8px rgba(0,0,0,0.2);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        header h1 { color:#ff6b6b; font-size:2rem; }
+        
+        /* Navigation Links (Desktop/Default) */
+        header nav { display:flex; gap:15px; flex-wrap:wrap; }
+        header nav a {
+            color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; transition:0.3s; font-weight:500;
+        }
+        header nav a:hover { background:#ff6b6b; }
+        
+        /* Mobile Menu Button (Hamburger) */
+        .menu-toggle {
+            display: none; /* Hidden by default */
+            background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; padding: 5px;
+        }
 
-    /* MAIN */
-    main.container { 
-      width:90%; 
-      max-width:1200px; 
-      margin:auto; 
-      padding:40px 0; 
-      flex:1; 
-      display:flex; 
-      flex-direction:column; 
-      justify-content:center; 
-      align-items:center;
-    }
+        /* MAIN */
+        main.container { 
+            width:90%; max-width:1200px; margin:auto; padding:40px 0; flex:1; display:flex; flex-direction:column; 
+            align-items:center; padding-top: 60px;
+        }
+        h2 { margin:20px 0; color:#1e1e2f; text-align:center; }
+        .card { 
+            background:#fff; border-radius:10px; padding:25px 30px; text-align:center; 
+            box-shadow:0 2px 8px rgba(0,0,0,0.1); font-size:1.1rem;
+        }
 
-    h2 { margin:20px 0; color:#1e1e2f; text-align:center; }
+        /* --------------------------------------------------- */
+        /* TABLE (Desktop View) */
+        /* --------------------------------------------------- */
+        .table-wrapper { overflow-x:auto; width:100%; margin-top:20px; display:flex; justify-content:center; }
+        table { 
+            width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; 
+            box-shadow:0 2px 8px rgba(0,0,0,0.1); 
+            min-width: 600px; 
+        }
+        th, td { padding:12px 15px; border-bottom:1px solid #ddd; }
+        th { background:#ff6b6b; color:#fff; }
+        tr:hover { background:#f9f9f9; }
 
-    /* Card when no requests */
-    .card { 
-      background:#fff; 
-      border-radius:10px; 
-      padding:25px 30px; 
-      text-align:center; 
-      box-shadow:0 2px 8px rgba(0,0,0,0.1); 
-      font-size:1.1rem;
-    }
+        /* Left-align Bike column for better data reading */
+        table tbody tr td:first-child,
+        table thead tr th:first-child {
+            text-align: left;
+        }
+        table tbody tr td:not(:first-child),
+        table thead tr th:not(:first-child) {
+            text-align: center;
+        }
+        /* Hide mobile card view by default */
+        .mobile-card-view { display: none; }
 
-    /* TABLE */
-    .table-wrapper { overflow-x:auto; width:100%; margin-top:20px; display:flex; justify-content:center; }
-    table { 
-      width:100%; 
-      border-collapse:collapse; 
-      background:#fff; 
-      border-radius:10px; 
-      overflow:hidden; 
-      box-shadow:0 2px 8px rgba(0,0,0,0.1); 
-      min-width:600px; 
-    }
-    th, td { padding:12px 15px; text-align:center; border-bottom:1px solid #ddd; }
-    th { background:#ff6b6b; color:#fff; }
-    tr:hover { background:#f9f9f9; }
 
-    /* FOOTER */
-    footer {
-      background:#1e1e2f; 
-      color:#fff; 
-      padding:35px 5%; 
-      display:flex; 
-      flex-wrap:wrap; 
-      justify-content:space-between; 
-      gap:20px;
-    }
-    footer .footer-section { flex:1; min-width:200px; }
-    footer h3 { color:#ff6b6b; margin-bottom:10px; }
-    footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; }
-    footer a:hover { text-decoration:underline; }
-    footer form input, footer form textarea { width:100%; padding:6px; margin-bottom:6px; border-radius:5px; border:1px solid #ccc; }
-    footer button { background:#ff6b6b; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
-    footer button:hover { background:#ff4b4b; }
+        /* FOOTER (Left-Aligned by default for modern look) */
+        footer {
+            background:#1e1e2f; color:#fff; padding:35px 5%; display:flex; flex-wrap:wrap; 
+            justify-content:space-between; gap:20px;
+        }
+        footer .footer-section { 
+            flex:1; min-width:200px; 
+            text-align: left; /* Aligns text within sections to the left */
+        }
+        footer h3 { color:#ff6b6b; margin-bottom:10px; }
+        footer p, footer a { color:#fff; font-size:0.9rem; text-decoration:none; }
+        footer a:hover { text-decoration:underline; }
+        footer form input, footer form textarea { 
+            width:100%; padding:6px; margin-bottom:6px; border-radius:5px; border:1px solid #ccc; 
+        }
+        footer button { 
+            background:#ff6b6b; color:#fff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; 
+        }
+        footer button:hover { background:#ff4b4b; }
 
-    /* RESPONSIVE */
-    @media(max-width:1024px){
-      header h1 { font-size:1.8rem; }
-      header nav a { padding:6px 12px; font-size:0.95rem; }
-      main.container { margin-top:30px; }
-    }
-    @media(max-width:768px){
-      header { flex-direction:column; align-items:flex-start; }
-      table, th, td { font-size:0.85rem; }
-      footer { flex-direction:column; align-items:flex-start; }
-    }
-    @media(max-width:480px){
-      header h1 { font-size:1.5rem; margin-bottom:10px; }
-      header nav { width:100%; justify-content:flex-start; gap:10px; flex-wrap:wrap; }
-    }
-  </style>
+        /* --------------------------------------------------- */
+        /* RESPONSIVE MEDIA QUERIES (<= 768px) */
+        /* --------------------------------------------------- */
+        @media (max-width: 768px) {
+            /* Header */
+            header { flex-wrap: wrap; }
+            .menu-toggle { display: block; }
+            header nav {
+                display: none; flex-direction: column; width: 100%; background: #1e1e2f;
+                position: absolute; top: 55px; left: 0; z-index: 999;
+            }
+            header nav.active { display: flex; }
+            header nav a { padding: 10px 20px; margin: 5px 0; border-radius: 0; }
+
+            /* Table View Toggle */
+            .table-wrapper { display: none; } /* Hide the full table on mobile */
+            .mobile-card-view { display: block; } /* Show the card view on mobile */
+
+            /* Mobile Card Styles */
+            .request-card {
+                background: #fff;
+                border-left: 5px solid #ff6b6b; /* Highlight border */
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                width: 100%;
+                max-width: 450px;
+            }
+            .card-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 5px 0;
+                border-bottom: 1px dashed #eee;
+            }
+            .card-item:last-child {
+                border-bottom: none;
+            }
+            .card-label {
+                font-weight: 600;
+                color: #555;
+            }
+            .card-value {
+                color: #1e1e2f;
+                font-weight: 500;
+                text-align: right;
+            }
+            .card-value.status-Pending { color: orange; }
+            .card-value.status-Approved { color: green; }
+            .card-value.status-Rejected { color: red; }
+            
+            /* Footer Alignment */
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left; 
+            }
+            footer .footer-section {
+                min-width: 90%;
+                margin-bottom: 20px;
+                text-align: left;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <h1>BikeRental</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/user/profile" class="btn">Profile</a>
-      <a href="/logout">Logout</a>
-    </nav>
-  </header>
+    <header>
+        <h1>BikeRental</h1>
+        <button class="menu-toggle" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav id="navbar-links">
+            <a href="/">Home</a>
+            <a href="/user/profile" class="btn">Profile</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="container">
-    <h2>Your Requests</h2>
+    <main class="container">
+        <h2>Your Requests</h2>
 
-    <% if (!requests || requests.length === 0) { %>
-      <div class="card">No requests found.</div>
-    <% } else { %>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Bike</th>
-              <th>Days</th>
-              <th>Total</th>
-              <th>Status</th>
-              <th>Requested On</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% requests.forEach(r => { %>
-              <tr>
-                <td><%= r.bike ? r.bike.name : 'Deleted bike' %></td>
-                <td><%= r.days %></td>
-                <td>₹ <%= r.totalPrice %></td>
-                <td><%= r.status %></td>
-                <td><%= new Date(r.createdAt).toLocaleString() %></td>
-              </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      </div>
-    <% } %>
-  </main>
+        <% if (!requests || requests.length === 0) { %>
+            <div class="card">No requests found.</div>
+        <% } else { %>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-section">
-      <h3>BikeRental</h3>
-      <p>Your trusted bike rental service.</p>
-      <p>© <%= new Date().getFullYear() %> BikeRental</p>
-    </div>
-    <div class="footer-section">
-      <h3>Links</h3>
-      <p><a href="/">Home</a></p>
-      <p><a href="/login">Login</a></p>
-      <p><a href="/signup">Signup</a></p>
-    </div>
-    <div class="footer-section">
-      <h3>Contact</h3>
-      <p>Email: support@bikerental.com</p>
-      <p>Phone: +91 9876543210</p>
-      <p>Address: 123 Main St, City</p>
-    </div>
-    <div class="footer-section">
-      <h3>Feedback</h3>
-      <form action="/feedback" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Your feedback" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  </footer>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bike</th>
+                            <th>Days</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Requested On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% requests.forEach(r => { %>
+                            <tr>
+                                <td><%= r.bike ? r.bike.name : 'Deleted bike' %></td>
+                                <td><%= r.days %></td>
+                                <td>₹ <%= r.totalPrice %></td>
+                                <td><%= r.status %></td>
+                                <td><%= new Date(r.createdAt).toLocaleString() %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mobile-card-view">
+                <% requests.forEach(r => { %>
+                    <div class="request-card">
+                        <div class="card-item">
+                            <span class="card-label">Bike</span>
+                            <span class="card-value"><%= r.bike ? r.bike.name : 'Deleted bike' %></span>
+                        </div>
+                        <div class="card-item">
+                            <span class="card-label">Days</span>
+                            <span class="card-value"><%= r.days %></span>
+                        </div>
+                        <div class="card-item">
+                            <span class="card-label">Total Price</span>
+                            <span class="card-value">₹ <%= r.totalPrice %></span>
+                        </div>
+                        <div class="card-item">
+                            <span class="card-label">Status</span>
+                            <span class="card-value status-<%= r.status %>"><%= r.status %></span>
+                        </div>
+                        <div class="card-item">
+                            <span class="card-label">Requested On</span>
+                            <span class="card-value"><%= new Date(r.createdAt).toLocaleString() %></span>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+
+        <% } %>
+    </main>
+
+    <footer>
+        <div class="footer-section">
+            <h3>BikeRental</h3>
+            <p>Your trusted bike rental service.</p>
+            <p>© <%= new Date().getFullYear() %> BikeRental</p>
+        </div>
+        <div class="footer-section">
+            <h3>Links</h3>
+            <p><a href="/">Home</a></p>
+            <p><a href="/login">Login</a></p>
+            <p><a href="/signup">Signup</a></p>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p>Email: support@bikerental.com</p>
+            <p>Phone: +91 9876543210</p>
+            <p>Address: 123 Main St, City</p>
+        </div>
+        <div class="footer-section">
+            <h3>Feedback</h3>
+            <form action="/feedback" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Your feedback" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.getElementById('navbar-links');
+
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
 
 </body>
 </html>

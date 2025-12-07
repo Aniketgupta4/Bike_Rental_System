@@ -3,105 +3,332 @@
 <head>
   <meta charset="UTF-8">
   <title>Bike Rental - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* RESET */
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-    body { background:#f9f9f9; color:#333; line-height:1.6; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-    /* COLORS */
+    body {
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
     :root {
-      --primary:#ff6b6b;
-      --secondary:#1e1e2f;
-      --light:#f9f9f9;
-      --dark:#333;
-      --card-bg:#fff;
+      --primary: #ff6b6b;
+      --secondary: #1e1e2f;
+      --light: #ffffff;
+      --dark: #222;
     }
 
     /* NAVBAR */
     .navbar {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:15px 5%; background:var(--secondary); color:#fff; position:sticky; top:0; z-index:1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      flex-wrap:wrap;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 6%;
+      background: var(--secondary);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .navbar .logo { font-size:2rem; font-weight:700; color:var(--primary); }
-    .navbar nav { display:flex; gap:15px; flex-wrap:wrap; margin-top:5px; }
-    .navbar nav a {
-      color:#fff; text-decoration:none; padding:8px 16px; border-radius:8px; transition:0.3s;
-      font-weight:500;
+
+    .navbar .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
     }
-    .navbar nav a:hover { background:var(--primary); }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: 0.3s;
+      font-size: 1rem;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background: var(--primary);
+    }
+
+    /* HAMBURGER */
+    .menu-btn {
+      display: none;
+      cursor: pointer;
+      font-size: 28px;
+      color: #fff;
+    }
+
+    /* MOBILE NAV - CHANGES START HERE */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      /* background: var(--secondary);  <-- इसे हटा दें या transparent कर दें */
+      background: var(--secondary);
+      width: 100%;
+      padding: 15px 6%; /* साइड पैडिंग जोड़ें */
+      text-align: left; /* बाएँ संरेखण (left alignment) */
+      gap: 10px;
+      animation: fade 0.2s ease-in;
+    }
+
+    .mobile-nav a {
+      color: var(--light); /* टेक्स्ट को सफेद करें */
+      padding: 8px 0; /* पैडिंग को एडजस्ट करें */
+      text-align: left; /* यह सुनिश्चित करता है कि लिंक का टेक्स्ट भी बाएँ संरेखित हो */
+      width: 100%;
+    }
+
+    .mobile-nav a:hover {
+      background: var(--primary);
+      border-radius: 6px;
+      padding: 8px 10px; /* hover पर थोड़ा पैडिंग दें */
+    }
+    /* MOBILE NAV - CHANGES END HERE */
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
     /* HERO */
     .hero {
       background: linear-gradient(135deg, var(--primary), #f06595);
-      color:#fff; text-align:center; padding:80px 20px;
+      color: #fff;
+      text-align: center;
+      padding: 85px 20px;
     }
-    .hero h1 { font-size:3rem; margin-bottom:15px; }
-    .hero p { font-size:1.2rem; }
 
-    /* GRID CARDS */
-    .container { width:90%; max-width:1200px; margin:auto; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:25px; margin:40px 0; }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 8px;
+    }
+
+    /* GRID */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      margin: 45px 0;
+    }
+
     .card {
-      background:var(--card-bg); border-radius:15px; overflow:hidden;
-      box-shadow:0 5px 15px rgba(0,0,0,0.1); transition:0.3s; display:flex; flex-direction:column;
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
     }
-    .card:hover { transform:translateY(-8px); box-shadow:0 10px 30px rgba(0,0,0,0.2); }
-    .thumb { width:100%; height:160px; object-fit:cover; }
-    .card-body { padding:15px; flex:1; display:flex; flex-direction:column; justify-content:space-between; }
-    .card-body h3 { font-size:1.2rem; margin-bottom:8px; color:var(--secondary); }
-    .card-body .price { font-weight:bold; color:var(--primary); margin-bottom:10px; }
-    .card-body .btn {
-      text-align:center; padding:10px; border-radius:8px; background:var(--secondary);
-      color:#fff; font-weight:500; text-decoration:none; transition:0.3s;
+
+    .card:hover {
+      transform: translateY(-6px);
     }
-    .card-body .btn:hover { background:var(--primary); }
+
+    .thumb {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-body h3 {
+      font-size: 1.25rem;
+      color: var(--secondary);
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .btn {
+      padding: 12px;
+      text-align: center;
+      border-radius: 8px;
+      background: var(--secondary);
+      color: #fff;
+      text-decoration: none;
+      transition: .3s;
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      background: var(--primary);
+    }
 
     /* FOOTER */
-    .footer { background:var(--secondary); color:#fff; padding:60px 5% 20px; }
-    .footer-container { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:30px; }
-    .footer h3 { color:var(--primary); margin-bottom:15px; }
-    .footer ul { list-style:none; }
-    .footer ul li { margin-bottom:10px; }
-    .footer ul li a { color:#fff; text-decoration:none; transition:0.3s; }
-    .footer ul li a:hover { color:var(--primary); }
-    .footer .social-icons a {
-      display:inline-block; width:35px; height:35px; background:var(--primary); color:#fff;
-      text-align:center; line-height:35px; border-radius:50%; margin-right:10px; transition:0.3s;
+    .footer {
+      background: var(--secondary);
+      color: #fff;
+      padding: 55px 6% 25px;
+      margin-top: 40px;
     }
-    .footer .social-icons a:hover { background:#fff; color:var(--primary); }
-    .footer form input, .footer form textarea {
-      width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:none;
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
     }
+
+    .footer h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .footer ul {
+      list-style: none;
+    }
+
+    .footer ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: .3s;
+    }
+
+    .footer ul li a:hover {
+      color: var(--primary);
+    }
+
+    .footer form input,
+    .footer form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
     .footer form button {
-      background:var(--primary); color:#fff; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; transition:0.3s;
+      background: var(--primary);
+      padding: 10px;
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: .3s;
     }
-    .footer form button:hover { background:#fff; color:var(--primary); }
 
-    .footer p { text-align:center; margin-top:30px; font-size:0.9rem; color:#ccc; }
-
-    /* RESPONSIVE HERO TEXT */
-    @media(max-width:1024px){ .hero h1{ font-size:2.5rem; } .hero p{ font-size:1rem; } }
-    @media(max-width:768px){ 
-      .hero h1{ font-size:2rem; }
-      .hero p{ font-size:0.95rem; }
-      .navbar nav { justify-content:center; width:100%; margin-top:10px; }
-      .grid { grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:20px; }
+    .footer form button:hover {
+      background: #fff;
+      color: var(--primary);
     }
-    @media(max-width:480px){
-      .hero { padding:60px 10px; }
-      .grid { grid-template-columns: 1fr; gap:15px; }
-      .card-body .btn { padding:8px; font-size:0.9rem; }
-      .footer-container { grid-template-columns: 1fr; gap:25px; }
+
+    .social-icons a {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 50%;
+      line-height: 36px;
+      text-align: center;
+      margin-right: 8px;
+      color: #fff;
+      font-weight: 700;
+      transition: .3s;
+    }
+
+    .social-icons a:hover {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    .footer p {
+      text-align: center;
+      margin-top: 30px;
+      font-size: .9rem;
+      color: #ccc;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:920px) {
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+    }
+
+    @media(max-width:768px) {
+      .navbar nav {
+        display: none;
+      }
+      .menu-btn {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+
+    @media(max-width:480px) {
+      .hero {
+        padding: 65px 14px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .card-body h3 {
+        font-size: 1.1rem;
+      }
+      .btn {
+        padding: 10px;
+        font-size: .9rem;
+      }
     }
   </style>
+
+  <script>
+    function toggleMenu() {
+      const m = document.getElementById("mobileNav");
+      m.style.display = m.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo">BikeRental</div>
+
+    <span class="menu-btn" onclick="toggleMenu()">☰</span>
+
     <nav>
       <a href="/">Home</a>
       <% if (!user) { %>
@@ -118,7 +345,21 @@
     </nav>
   </header>
 
-  <!-- HERO -->
+  <div class="mobile-nav" id="mobileNav">
+   
+    <% if (!user) { %>
+      <a href="/login">Login</a>
+      <a href="/signup">Signup</a>
+    <% } else { %>
+      <% if (user.role === 'admin') { %>
+        <a href="/admin/dashboard">Admin Dashboard</a>
+      <% } else { %>
+        <a href="/user/dashboard">Dashboard</a>
+      <% } %>
+      <a href="/logout">Logout</a>
+    <% } %>
+  </div>
+
   <section class="hero">
     <div class="container">
       <h1>Discover Your Ride</h1>
@@ -126,19 +367,14 @@
     </div>
   </section>
 
-  <!-- BIKE GRID -->
   <main class="container">
     <section class="grid">
       <% if (!bikes || bikes.length === 0) { %>
-        <div class="card">No bikes available</div>
+        <div class="card"><h3 style="padding:20px;text-align:center;">No bikes available</h3></div>
       <% } else { %>
         <% bikes.forEach(b => { %>
           <div class="card">
-            <% if (b.image) { %>
-              <img src="<%= b.image %>" class="thumb" alt="<%= b.name %>">
-            <% } else { %>
-              <img src="/uploads/default-bike.jpg" class="thumb" alt="Bike">
-            <% } %>
+            <img src="<%= b.image || "/uploads/default-bike.jpg" %>" class="thumb">
             <div class="card-body">
               <h3><%= b.name %></h3>
               <p class="price">₹ <%= b.pricePerDay %> / day</p>
@@ -150,13 +386,13 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer-container">
+    <div class="footer-container">
       <div>
         <h3>About</h3>
         <p>BikeRental offers a wide variety of bikes for every rider. Easy booking and professional service.</p>
       </div>
+
       <div>
         <h3>Quick Links</h3>
         <ul>
@@ -166,6 +402,7 @@
           <li><a href="/login">Login</a></li>
         </ul>
       </div>
+
       <div>
         <h3>Contact</h3>
         <ul>
@@ -174,6 +411,7 @@
           <li>Address: 123, Main Street, City</li>
         </ul>
       </div>
+
       <div>
         <h3>Feedback</h3>
         <form action="/feedback" method="POST">
@@ -182,10 +420,11 @@
           <textarea name="message" placeholder="Your Message" rows="3" required></textarea>
           <button type="submit">Send</button>
         </form>
+
         <div class="social-icons" style="margin-top:15px;">
-          <a href="#" title="Facebook">F</a>
-          <a href="#" title="Twitter">T</a>
-          <a href="#" title="Instagram">I</a>
+          <a href="#">F</a>
+          <a href="#">T</a>
+          <a href="#">I</a>
         </div>
       </div>
     </div>
