@@ -1,104 +1,143 @@
-🚴‍♂️ Bike Rental System — Rent Your Ride in Minutes!
+🏍️ Bike Rental System
 
-🛵 A full-stack web application where users can explore bikes, request bookings, and admins can manage bike listings & approvals — completely online.
-🌟 Core Features
-👤 User Panel
 
-✔ Register / Login / Logout
-✔ View all available bikes
-✔ Request booking for a specific date
-✔ Track booking status (Pending / Approved / Rejected)
-✔ Manage personal profile
 
-🛡 Admin Panel
 
-🆕 Add bikes
-✏ Edit bikes
+
+
+
+
+
+
+
+
+
+
+🚴‍♂️ A complete platform where users can rent bikes online and admins can manage bike listings & booking requests. Built using MongoDB, Express, Node.js, and EJS.
+
+🚀 Overview
+
+This is a full-stack bike rental web application with the following core features:
+
+👤 User authentication (signup/login)
+
+🏍️ Users can browse available bikes
+
+📝 Users can request bike booking for a date and duration
+
+🔄 Admin can approve / reject booking requests
+
+🖼 Admin can add, edit & delete bikes with images
+
+⚡ Responsive UI using EJS
+
+This project is ideal for learning authentication, file upload, session management, dynamic rendering, and CRUD operations using Node.js & MongoDB.
+
+🧰 Tech Stack
+Tech	Description
+🗄️ MongoDB	Stores users, bikes & bookings
+⚙️ Express.js	Backend server & API routing
+🟢 Node.js	Runtime environment
+🖥️ EJS	Dynamic HTML templating
+🔐 bcrypt & express-session	Authentication & session security
+☁ Cloudinary + Multer	Image upload & storage
+⚙️ Features
+👤 User Features
+
+🔐 Signup / Login / Logout
+
+🏍️ View all available bikes
+
+📅 Book a bike for selected days
+
+📍 Track booking status (Pending / Approved / Rejected)
+
+👤 Update profile info
+
+🛡 Admin Features
+
+➕ Add new bikes
+
+✏️ Edit bikes (price, name, description, image & availability)
+
 🗑 Delete bikes
-🖼 Upload bike images via Cloudinary
-🔄 Change availability anytime
-✔ Approve / ❌ Reject bookings
 
-🔔 Fully secure authentication + session management included
+🖼 Upload images using Cloudinary
 
-🧠 Why This Project is Special
+✔ Approve / ❌ Reject booking requests
 
-🔹 Uses MVC architecture
-🔹 Clean & scalable folder structure
-🔹 Cloudinary + Multer storage for production deployments
-🔹 Production-ready authentication with bcrypt + session
-🔹 Real-world rental workflow
+🟢 Mark bike availability ON/OFF anytime
 
-🖥 Tech Stack
-Layer	Technologies Used
-Frontend	HTML, CSS, JavaScript, EJS
-Backend	Node.js, Express.js
-Database	MongoDB & Mongoose
-Auth	express-session, bcrypt
-Image Storage	Cloudinary + Multer
-Deployment	Render / Railway / VPS Ready
-📸 Screenshots
-Page	Preview
-🏠 Home	add screenshot
-🚴 Bikes Page	add screenshot
-🛒 Booking Page	add screenshot
-🛡 Admin Dashboard	add screenshot
+🔄 How It Works
 
-Screenshots add karte hi README 🔥 level professional ban jayega
+User Authentication
 
-📂 Project Folder Layout
+bcrypt hashes password
+
+express-session creates secure session
+
+Bike Management
+
+Admin adds bikes with an image, price & description
+
+Cloudinary stores image securely
+
+Booking System
+
+User selects bike & dates
+
+Request stored in DB → Admin decision
+
+Status shown to user dynamically
+
+💻 Setup & Usage
+1️⃣ Clone the repository
+git clone https://github.com/yourusername/bike-rental-system.git
+cd bike-rental-system
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Setup .env file
+MONGO_URL=your_mongodb_url
+SESSION_SECRET=your_secret
+CLOUDINARY_CLOUD_NAME=xxxx
+CLOUDINARY_API_KEY=xxxx
+CLOUDINARY_API_SECRET=xxxx
+PORT=5000
+
+4️⃣ Run the project
+npm start
+
+
+App will run on ➤ http://localhost:5000
+
+📌 Folder Structure
 📦 Bike Rental System
  ┣ 📁 config
  ┣ 📁 controllers
  ┣ 📁 models
  ┣ 📁 routes
  ┣ 📁 views
- ┣ 📁 public
- ┃ ┗ 📁 css
+ ┣ 📁 public/css
  ┣ server.js
- ┣ package.json
- ┗ .env
+ ┗ package.json
 
-🔧 Setup & Installation
-# Clone repository
-git clone https://github.com/your-username/Bike-Rental-System.git
+🔮 Future Enhancements
 
-# Navigate
-cd Bike-Rental-System
+🔜 Online payment integration (Razorpay)
 
-# Install dependencies
-npm install
+🔜 Push notifications & email confirmations
 
-# Run project
-npm start
+🔜 Google OAuth login
 
+🔜 Offers / coupons
 
-📌 App will start at ➤ http://localhost:5000
-
-🔐 Environment Variables
-
-Create .env file & add:
-
-MONGO_URL=your_mongo_url
-SESSION_SECRET=your_secret
-PORT=5000
-
-CLOUDINARY_CLOUD_NAME=xxxx
-CLOUDINARY_API_KEY=xxxx
-CLOUDINARY_API_SECRET=xxxx
-
-🚀 Future Enhancements
-Enhancement	Status
-Online Payments (Razorpay)	🔜
-Live Map Pickup Locations	🔜
-Coupon / Discounts	🔜
-Google OAuth Login	🔜
-Admin Analytics Dashboard	🔜
 👨‍💻 Author
 
-💙 Developed by — Aniket Gupta
-Full-Stack Developer | Passionate about real-world projects
+Developed with ❤️ by Aniket Gupta
+📩 Feel free to contribute or suggest improvements!
 
 ⭐ Support
 
-If you liked this project, don’t forget to star ⭐ the repo — it motivates me to build more amazing projects 😄
+If you like this project, kindly star ⭐ the repository — it motivates further development 😄
