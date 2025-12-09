@@ -1,143 +1,110 @@
-🏍️ Bike Rental System
+🚲 Bike Rental System — MERN/Node Project
 
+An online Bike Renting Platform where users can browse bikes, check availability, create bookings, make payments, and manage rentals — while admins can add/remove bikes, manage bookings & users through a powerful dashboard.
 
+🌐 Live Demo
 
+🔗 Deployed Link: Add here
+🔗 API Base URL: Add here
 
+👨‍💻 Tech Stack
+Category	Technologies
+Frontend	EJS / Tailwind CSS / JavaScript
+Backend	Node.js / Express.js
+Database	MongoDB / Mongoose
+Authentication	JWT / Bcrypt
+Image Storage	Cloudinary
+Deployment	Render / Vercel / Railway / MongoDB Atlas
+🛠️ NPM Packages Used
+express, mongoose, dotenv, multer, cloudinary, bcryptjs, jsonwebtoken,
+cookie-parser, express-session, connect-mongo, validator
 
+💡 Features
+👤 User Panel
 
+✔ User Signup & Login
+✔ Browse all bikes
+✔ View detailed bike information
+✔ Live availability status
+✔ Book a bike (date-based booking)
+✔ View booking history & payments
+✔ Cancel booking
 
+🛡 Admin Panel
 
+✔ Add / Edit / Delete bikes
+✔ Upload multiple images via Cloudinary
+✔ Manage bookings & users
+✔ Change bike availability instantly
+✔ Dashboard with statistics
 
+📸 Screenshots
 
+(Add images here — dashboard, user home, bike details, booking page)
 
+/assets/screenshots/home.png
+/assets/screenshots/dashboard.png
+/assets/screenshots/booking.png
 
+📂 Folder Structure
+Bike-Rental-System
+│── controllers
+│── models
+│── middleware
+│── routes
+│── public
+│── uploads
+│── views (EJS)
+│── config
+│── package.json
+│── server.js
+│── .env
 
+⚙️ Environment Variables
 
-🚴‍♂️ A complete platform where users can rent bikes online and admins can manage bike listings & booking requests. Built using MongoDB, Express, Node.js, and EJS.
+Create a .env file:
 
-🚀 Overview
+MONGO_URI=
+JWT_SECRET=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+SESSION_SECRET=
 
-This is a full-stack bike rental web application with the following core features:
-
-👤 User authentication (signup/login)
-
-🏍️ Users can browse available bikes
-
-📝 Users can request bike booking for a date and duration
-
-🔄 Admin can approve / reject booking requests
-
-🖼 Admin can add, edit & delete bikes with images
-
-⚡ Responsive UI using EJS
-
-This project is ideal for learning authentication, file upload, session management, dynamic rendering, and CRUD operations using Node.js & MongoDB.
-
-🧰 Tech Stack
-Tech	Description
-🗄️ MongoDB	Stores users, bikes & bookings
-⚙️ Express.js	Backend server & API routing
-🟢 Node.js	Runtime environment
-🖥️ EJS	Dynamic HTML templating
-🔐 bcrypt & express-session	Authentication & session security
-☁ Cloudinary + Multer	Image upload & storage
-⚙️ Features
-👤 User Features
-
-🔐 Signup / Login / Logout
-
-🏍️ View all available bikes
-
-📅 Book a bike for selected days
-
-📍 Track booking status (Pending / Approved / Rejected)
-
-👤 Update profile info
-
-🛡 Admin Features
-
-➕ Add new bikes
-
-✏️ Edit bikes (price, name, description, image & availability)
-
-🗑 Delete bikes
-
-🖼 Upload images using Cloudinary
-
-✔ Approve / ❌ Reject booking requests
-
-🟢 Mark bike availability ON/OFF anytime
-
-🔄 How It Works
-
-User Authentication
-
-bcrypt hashes password
-
-express-session creates secure session
-
-Bike Management
-
-Admin adds bikes with an image, price & description
-
-Cloudinary stores image securely
-
-Booking System
-
-User selects bike & dates
-
-Request stored in DB → Admin decision
-
-Status shown to user dynamically
-
-💻 Setup & Usage
-1️⃣ Clone the repository
-git clone https://github.com/yourusername/bike-rental-system.git
-cd bike-rental-system
-
-2️⃣ Install dependencies
+🚀 How to Run Locally
+git clone https://github.com/your-username/Bike_Rental_System.git
+cd Bike_Rental_System
 npm install
-
-3️⃣ Setup .env file
-MONGO_URL=your_mongodb_url
-SESSION_SECRET=your_secret
-CLOUDINARY_CLOUD_NAME=xxxx
-CLOUDINARY_API_KEY=xxxx
-CLOUDINARY_API_SECRET=xxxx
-PORT=5000
-
-4️⃣ Run the project
 npm start
 
 
-App will run on ➤ http://localhost:5000
+App runs at: http://localhost:3000
 
-📌 Folder Structure
-📦 Bike Rental System
- ┣ 📁 config
- ┣ 📁 controllers
- ┣ 📁 models
- ┣ 📁 routes
- ┣ 📁 views
- ┣ 📁 public/css
- ┣ server.js
- ┗ package.json
+👨‍🏭 Admin Login (Demo)
+Email: admin@gmail.com
+Password: admin123
+
+
+(Change credentials after deployment!)
 
 🔮 Future Enhancements
 
-🔜 Online payment integration (Razorpay)
+🔹 Online payment (Razorpay / Stripe)
+🔹 Real-time location-based bike suggestions
+🔹 Mobile App (React Native)
+🔹 Coupons & Wallet
 
-🔜 Push notifications & email confirmations
+🤝 Contributions
 
-🔜 Google OAuth login
+Contributions are always welcome!
+Fork → Create Branch → Commit → Pull Request
 
-🔜 Offers / coupons
+📜 License
 
-👨‍💻 Author
+🔐 MIT License — free to modify & distribute.
 
-Developed with ❤️ by Aniket Gupta
-📩 Feel free to contribute or suggest improvements!
+🌟 Show Your Support
 
-⭐ Support
+⭐ Star this repository if you like the project!
 
-If you like this project, kindly star ⭐ the repository — it motivates further development 😄
+🔗 Created by — Aniket Gupta
