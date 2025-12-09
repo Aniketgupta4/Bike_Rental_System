@@ -1,134 +1,128 @@
 🚴‍♂️ Bike Rental System — Full-Stack Web Application
 
-A complete online bike renting platform built using Node.js + Express + MongoDB + EJS where users can browse and rent bikes, and admins can manage inventory and bookings with a clean dashboard.
+A powerful and user-friendly platform to browse, rent & manage bikes online, built with Node.js, Express, MongoDB & EJS.
+Designed with role-based authentication, Cloudinary image upload, and admin booking approval system.
 
 📌 Table of Contents
 
+1️⃣ Overview
+
+2️⃣ Features
+
+3️⃣ Screenshots
+
+4️⃣ Tech Stack
+
+5️⃣ Folder Structure
+
+6️⃣ Environment Variables
+
+7️⃣ Installation & Setup
+
+8️⃣ Authentication Flow
+
+9️⃣ Future Improvements
+
+🔟 Author
+
 📝 Overview
+
+The Bike Rental System provides a seamless experience for users to rent bikes and for admins to manage fleet inventory & bookings.
+The application includes real-time updates, secure login, and a clean admin dashboard for easy management.
 
 ✨ Features
-
-📸 Screenshots
-
-🛠 Tech Stack
-
-📂 Folder Structure
-
-⚙️ Environment Variables
-
-🚀 Installation & Setup
-
-🔐 Authentication
-
-💡 Future Updates
-
-🧑‍💻 Developer
-
-📝 Overview
-
-The Bike Rental System simplifies renting bikes online.
-Users can view bikes → book → track booking status, while Admins can add / edit / delete bikes & approve bookings.
-
-✨ Key Features
 👤 User Panel
 
 ✔ Register / Login / Logout
-✔ Browse available bikes
-✔ View bike details
+✔ View available bikes
 ✔ Book a bike
-✔ View booking history and status
-✔ Edit personal profile
+✔ Track booking status
+✔ Manage personal profile
 
 🛡 Admin Panel
 
-✔ Secure Admin authentication
-✔ Add / edit / delete bikes
-✔ Cloudinary image upload
-✔ Manage booking requests — approve / reject
-✔ Manage bike availability
+✔ Add / Edit / Delete bikes
+✔ Upload bike images using Cloudinary + Multer
+✔ View and manage booking requests
+✔ Approve / reject rentals
+✔ Toggle bike availability
 
 📸 Screenshots
+Page	Preview
+🔹 Home Page	(Add your screenshot here)
+🔹 Bike Listing	(Add screenshot)
+🔹 Booking Page	(Add screenshot)
+🔹 Admin Dashboard	(Add screenshot)
 
-(Add your own later)
+💡 Tip: Add real screenshots later for a professional touch.
 
-Page	Screenshot
-Home Page	
-
-Bike List	
-
-Booking Page	
-
-Admin Dashboard	
 🛠 Tech Stack
-Layer	Technology
-Frontend	HTML, CSS, JavaScript, EJS
-Backend	Node.js, Express.js
-Auth	express-session + bcrypt
-Database	MongoDB + Mongoose
-Storage	Cloudinary + Multer
+Category	Technology
+Frontend	HTML • CSS • JavaScript • EJS
+Backend	Node.js • Express.js
+Database	MongoDB • Mongoose
+Auth	Sessions + bcrypt
+File Upload	Cloudinary + Multer
 Deployment	Render / Railway
 📂 Folder Structure
-/config
-/controllers
-/models
-/routes
-/views
-/public
-  /css
-/server.js
-.env
-package.json
+📦 Bike Rental System
+ ┣ 📁 config
+ ┣ 📁 controllers
+ ┣ 📁 models
+ ┣ 📁 routes
+ ┣ 📁 views
+ ┣ 📁 public
+ ┃ ┗ 📁 css
+ ┣ server.js
+ ┣ .env
+ ┗ package.json
 
-⚙️ Environment Variables
+🔐 Environment Variables
 
-Create a .env file in root:
+Create a .env file in the project root and add:
 
 MONGO_URL=your_mongodb_connection_string
+SESSION_SECRET=your_secret
 PORT=5000
-SESSION_SECRET=your_secret_key
 
-CLOUDINARY_CLOUD_NAME=xxxxxxx
-CLOUDINARY_API_KEY=xxxxxxx
-CLOUDINARY_API_SECRET=xxxxxxx
+CLOUDINARY_CLOUD_NAME=xxxx
+CLOUDINARY_API_KEY=xxxx
+CLOUDINARY_API_SECRET=xxxx
 
 🚀 Installation & Setup
-# Clone repo
-git clone https://github.com/your-username/your-repo-name.git
+# Clone the repository
+git clone https://github.com/your-username/your-repo.git
 
-# Go inside project
+# Go inside the project
 cd bike-rental-system
 
-# Install dependencies
+# Install packages
 npm install
 
 # Start server
 npm start
 
 
-Server URL:
-👉 http://localhost:5000
+Server running at 👉 http://localhost:5000
 
-🔐 Authentication
+🔄 Authentication Flow
+Role	Redirect After Login
+User	/user/dashboard
+Admin	/admin/dashboard
 
-Passwords hashed using bcrypt
+Passwords are encrypted using bcrypt, and sessions are stored securely using express-session.
 
-Sessions stored securely using express-session
+🚧 Future Improvements
 
-Role-based access: user & admin
-
-💡 Future Roadmap
-
-🔹 Online payment integration
-🔹 Coupon / offer system
-🔹 Email booking notifications
+🔹 Online payment gateway (Razorpay / Stripe)
+🔹 Coupons / Discounts for users
+🔹 Admin analytics dashboard
+🔹 Email / SMS booking notifications
 🔹 Android app version
 
-🌟 Support
+🧑‍💻 Author
 
-If you like this project, please ⭐ the repository — it motivates me 😄
-Pull requests and suggestions are welcome!
-
-🧑‍💻 Developer
-
-Aniket Gupta
-Full-Stack Developer | MERN | Web Apps | UI Designer
+👤 Aniket Gupta
+💼 Full-Stack Developer | Passionate about Web Applications & UI/UX
+📧 Email: (add here)
+🔗 Portfolio: (add if available)
