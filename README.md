@@ -8,7 +8,7 @@
 ![Open Source](https://img.shields.io/badge/Open%20Source-💻-brightgreen)
 ![Made with ❤️ by Aniket](https://img.shields.io/badge/Made%20with-❤️-red)
 
-> 🚲 A complete **Bike Rental Web Platform** where users can **browse bikes, check availability, book bikes, and manage rentals**, while **admins manage bikes, bookings, and dashboard** — built using **MongoDB, Express, Node.js, and EJS**.
+> 🚲 A complete **Bike Rental Web Platform** where users can **browse bikes, book bikes, and manage rentals**, while **admins manage bikes, bookings, and dashboard** — built using **MongoDB, Express, Node.js, and EJS**.
 
 ---
 
@@ -16,7 +16,7 @@
 
 This is a **full-stack bike rental system** designed to manage online bike bookings.
 
-✔ Users can **signup/login**, search bikes, check availability, book bikes & manage rentals  
+✔ Users can **signup/login**, search bikes, book bikes & manage rentals  
 ✔ Admins can **add/delete/update bikes**, upload bike images to Cloudinary, manage users & bookings  
 ✔ Includes **authentication, authorization, cloud storage, and booking handling**
 
@@ -32,7 +32,7 @@ This is a **full-stack bike rental system** designed to manage online bike booki
 | 🖥️ EJS | Dynamic UI rendering |
 | 🔐 bcrypt / JWT | Authentication & encryption |
 | ☁️ Cloudinary | Bike image storage |
-| 🎨 Tailwind | Frontend UI styling |
+| 🎨 CSS | Frontend UI styling |
 
 ---
 
@@ -42,10 +42,8 @@ This is a **full-stack bike rental system** designed to manage online bike booki
 - Signup & Login
 - Browse all bikes
 - View bike details with images
-- Check availability
 - Book a bike (date-wise booking)
 - View booking history
-- Cancel booking
 
 ### 🛡 Admin
 - Add / Edit / Delete bikes
@@ -80,3 +78,5 @@ This is a **full-stack bike rental system** designed to manage online bike booki
 ```bash
 git clone https://github.com/yourusername/bike-rental-system.git
 cd bike-rental-system
+npm i
+node script.js
